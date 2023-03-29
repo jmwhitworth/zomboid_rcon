@@ -1,4 +1,4 @@
-from distutils.core import setup
+from setuptools import setup, Extension
 
 # read the contents of your README file
 from pathlib import Path
@@ -12,6 +12,7 @@ setup(
     license='GPL-3.0',
     description = 'Python class for interacting with Project Zomboid servers using RCON ',
     long_description=long_description,
+    long_description_content_type='text/markdown',
     author = 'Jack Whitworth',
     author_email = 'jack@jackwhitworth.com',
     url = 'https://github.com/JMWhitworth/zomboid_rcon',
