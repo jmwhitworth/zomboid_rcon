@@ -3,4 +3,4 @@
 from .zomboid_rcon import ZomboidRCON
 
 __title__ = 'zomboid_rcon'
-__version__ = '0.1.2'
+__version__ = '0.2.0'
