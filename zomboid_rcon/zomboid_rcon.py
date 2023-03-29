@@ -2,11 +2,11 @@
 Zomboid RCON.
 
     :copyright: (c) 2023 by JW.
-    :license: MIT, see LICENSE for more details.
+    :license: GPL-3.0, see LICENSE for more details.
 """
 
 from dotenv             import load_dotenv
-from source             import RConClient, CommandResult
+from source             import CommandResult, RConClient
 import os
 
 """
@@ -15,16 +15,20 @@ https://shockbyte.com/billing/knowledgebase/479/All-Console-Commands-for-Your-Pr
 """
 
 class ZomboidRCON(RConClient):
+    """
+    Used to interact with Zomboid servers via RCON
+    """
     def __init__(self,
             ip:str='localhost',
             port:int=27015,
             password:str='',
-            retries:int=5
+            retries:int=5,
+            logging:int=False
         ):
-        super().__init__(ip, port, password, retries)
+        super().__init__(ip, port, password, retries, logging)
     
-    def serverMsg(self, response:str) -> CommandResult:
-        return self.command("servermsg", response.replace(' ', '_').strip())
+    def serverMsg(self, message:str) -> CommandResult:
+        return self.command("servermsg", message.replace(' ', '_').strip())
     
     def players(self) -> CommandResult:
         return self.command("players")
@@ -52,4 +56,4 @@ if __name__ == "__main__":
         int(os.getenv('RETRIES'))
     )
     
-    print(pz.serverMsg().response)
+    print(pz.players().response)
