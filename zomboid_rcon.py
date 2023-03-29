@@ -9,11 +9,18 @@ from dotenv             import load_dotenv
 from source             import RConClient, CommandResult
 import os
 
+"""
+Credit to Shockbyte for the following resource:
+https://shockbyte.com/billing/knowledgebase/479/All-Console-Commands-for-Your-Project-Zomboid-Server.html
+"""
 
-class PZServer(RConClient):
-    # https://shockbyte.com/billing/knowledgebase/479/All-Console-Commands-for-Your-Project-Zomboid-Server.html
-    
-    def __init__(self, ip:str, port:int, password:str, retries:int=5):
+class ZomboidRCON(RConClient):
+    def __init__(self,
+            ip:str='localhost',
+            port:int=27015,
+            password:str='',
+            retries:int=5
+        ):
         super().__init__(ip, port, password, retries)
     
     def serverMsg(self, response:str) -> CommandResult:
@@ -38,11 +45,11 @@ class PZServer(RConClient):
 if __name__ == "__main__":
     load_dotenv()
     
-    pz = PZServer(
+    pz = ZomboidRCON(
         str(os.getenv('SERVER_IP')),
         int(os.getenv('SERVER_PORT')),
         str(os.getenv('SERVER_PASSWORD')),
         int(os.getenv('RETRIES'))
     )
     
-    print(pz.showOptions().response)
+    print(pz.serverMsg().response)

@@ -25,16 +25,15 @@ class CommandResult:
         return self._command
     
     @command.setter
-    def command(self, command:str) -> bool:
+    def command(self, command:str) -> None:
         """
         Validates input as string
         Returns true if set successfully
         """
         if isinstance(command, str):
-            self._command = command
-            return True
-        
-        raise ValueError("Command used must be a string")
+            self._command = command.strip()
+        else:
+            raise ValueError("Command used must be a string")
     
     @property
     def failureMessage(self) -> str:
@@ -42,16 +41,15 @@ class CommandResult:
         return self._failureMessage
     
     @failureMessage.setter
-    def failureMessage(self, failureMessage:str) -> bool:
+    def failureMessage(self, failureMessage:str) -> None:
         """
         Validates input as string
         Returns true if set successfully
         """
         if isinstance(failureMessage, str):
-            self._failureMessage = failureMessage
-            return True
-        
-        raise ValueError("Failure message used must be a string")
+            self._failureMessage = failureMessage.strip()
+        else:
+            raise ValueError("Failure message used must be a string")
     
     @property
     def response(self) -> str:
@@ -65,16 +63,15 @@ class CommandResult:
         return self.failureMessage
     
     @response.setter
-    def response(self, newResponse:str) -> bool:
+    def response(self, newResponse:str) -> None:
         """
         Validates input as string
         Returns true if set successfully
         """
         if isinstance(newResponse, str):
-            self._response = newResponse
-            return True
-        
-        raise ValueError("Command response must be a string")
+            self._response = newResponse.strip()
+        else:
+            raise ValueError("Command response must be a string")
     
     @property
     def successful(self) -> bool:
@@ -82,13 +79,12 @@ class CommandResult:
         return self._successful
     
     @successful.setter
-    def successful(self, successStatus:bool) -> bool:
+    def successful(self, successStatus:bool) -> None:
         """
         Validates input as boolean
         Returns true if set successfully
         """
         if isinstance(successStatus, bool):
             self._successful = successStatus
-            return True
-        
-        raise ValueError("Success status must be a boolean")
+        else:
+            raise ValueError("Success status must be a boolean")
