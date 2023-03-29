@@ -8,7 +8,7 @@ setup(
     author = 'Jack Whitworth',
     author_email = 'jack@jackwhitworth.com',
     url = 'https://jackwhitworth.com',
-    download_url = '',
+    download_url = 'https://github.com/JMWhitworth/zomboid_rcon/archive/refs/tags/0.1.0.tar.gz',
     keywords = [
         'project-zomboid',
         'rcon',
