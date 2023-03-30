@@ -1,4 +1,4 @@
-# zomboid-rcon version 0.2.1 (Beta)
+# zomboid-rcon version 0.2.2 (Beta)
  
 A Python package for interacting with Project Zomboid Servers using RCON.
 
