@@ -1,3 +1,2 @@
-python-dotenv==1.0.0
 rcon==2.3.9
 timeout-decorator==0.5.0

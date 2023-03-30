@@ -1,0 +1,37 @@
+[build-system]
+requires      = ["setuptools>=61.0.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "zomboid_rcon"
+version = "0.2.2"
+description = "Python class for interacting with Project Zomboid servers using RCON "
+readme = "README.md"
+license = { file = "LICENSE" }
+authors = [{ name = "Jack Whitworth", email = "jack@jackwhitworth.com" }]
+classifiers = [
+    'Development Status :: 4 - Beta',
+    'Intended Audience :: Developers',
+    'Topic :: Software Development :: Build Tools',
+    'License :: OSI Approved :: GNU General Public License (GPL)',
+    'Programming Language :: Python :: 3.8',
+    'Programming Language :: Python :: 3.9',
+    'Programming Language :: Python :: 3.10',
+    'Programming Language :: Python :: 3.11',
+]
+keywords = [
+    'project-zomboid',
+    'rcon',
+    'project-zomboid-rcon'
+]
+dependencies = [
+    "rcon >= 2.3.9",
+    "timeout_decorator >= 0.5.0"
+]
+requires-python = ">=3.8"
+
+[project.optional-dependencies]
+dev = []
+
+[project.urls]
+Homepage = "https://github.com/JMWhitworth/zomboid_rcon"

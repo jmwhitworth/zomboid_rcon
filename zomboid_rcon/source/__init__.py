@@ -5,7 +5,5 @@ Zomboid RCON.
 """
 
 
-from .zomboid_rcon  import ZomboidRCON
-
-__title__ = 'zomboid_rcon'
-__version__ = '0.2.2'
+from .CommandResult     import CommandResult
+from .RconClient        import RconClient

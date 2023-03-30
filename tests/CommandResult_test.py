@@ -1,6 +1,6 @@
 import unittest
 
-from zomboid_rcon.source.CommandResult import CommandResult
+from zomboid_rcon.source import CommandResult
 
 class CommandResult_test(unittest.TestCase):
     def setUp(self):
