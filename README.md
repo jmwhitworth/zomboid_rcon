@@ -16,7 +16,7 @@ if __name__ == "__main__":
     pz = ZomboidRCON(ip='localhost', password='myPassword')
     command = pz.serverMsg("You dead yet?")
     print(command.response)
-    print(command.response)
+    print(command.success)
 ```
 
 Outputs:
@@ -39,11 +39,15 @@ The follow commands are available through built-in methods:
 
 Or execute any command using the command method:
 ```
-from zomboid_rcon import ZomboidRCON
+from zomboid_rcon       import ZomboidRCON
 
 if __name__ == "__main__":
-    pz = ZomboidRCON(ip='localhost', password='myPassword')
-    command = pz.command("servermsg", "Hello!")
+    pz = ZomboidRCON(
+        ip='localhost',
+        password='myPassword',
+    )
+    
+    print(pz.players().response)
 ```
 
 
