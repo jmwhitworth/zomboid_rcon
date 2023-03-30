@@ -1,6 +1,6 @@
 # zomboid-rcon version 0.2.2 (Beta)
  
-A Python package for interacting with Project Zomboid Servers using RCON.
+A Python package for interacting with Project Zomboid Servers using RCON. [Pypi Package](https://pypi.org/project/zomboid-rcon/0.2.2/)
 
 This project uses the timeout_decorator package which is Unix/Linux only. Timeouts will cause errors on Windows due to this.
 
