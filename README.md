@@ -1,6 +1,6 @@
 # Zomboid-rcon: Python RCON for Project Zomboid Servers
  
-### Version: 1.0.1
+### Version: 1.0.2
 
 Zomboid-rcon enables you to easily communicate with your Project Zomboid servers via RCON. With zomboid-rcon, you can send commands to your server, manage players, and more, all from within your Python script.
 
