@@ -22,10 +22,10 @@ Using zomboid-rcon is easy. Here's a basic example:
 from zomboid_rcon import ZomboidRCON
 
 if __name__ == "__main__":
-    pz = ZomboidRCON(ip='localhost', password='myPassword')
+    pz = ZomboidRCON(ip='localhost', port=27015, password='myPassword')
     command = pz.serverMsg("You dead yet?")
     print(command.response)
-    print(command.success)
+    print(command.successfull)
 ```
 
 This example connects to a server running on your local machine and sends the message "You dead yet?".
