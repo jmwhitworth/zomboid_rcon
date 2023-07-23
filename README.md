@@ -25,7 +25,7 @@ if __name__ == "__main__":
     pz = ZomboidRCON(ip='localhost', port=27015, password='myPassword')
     command = pz.serverMsg("You dead yet?")
     print(command.response)
-    print(command.successfull)
+    print(command.successful)
 ```
 
 This example connects to a server running on your local machine and sends the message "You dead yet?".
