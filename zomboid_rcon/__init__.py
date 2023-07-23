@@ -8,4 +8,4 @@ Zomboid RCON: https://github.com/JMWhitworth/zomboid_rcon
 from .zomboid_rcon  import ZomboidRCON
 
 __title__ = 'zomboid_rcon'
-__version__ = '0.2.4'
+__version__ = '1.0.0'

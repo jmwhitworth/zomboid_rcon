@@ -26,4 +26,13 @@ if __name__ == "__main__":
         logging=LOGGING
     )
     
+    # Shows list of all currently connected players
     print(pz.players().response)
+
+    # Broadcasts message to all players
+    print(pz.servermsg("This is how you all died!").response)
+
+    # Shows list of current server options and values
+    print(pz.showoptions().response)
+
+    # For more, check the README.md
