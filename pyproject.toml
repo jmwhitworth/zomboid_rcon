@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "zomboid_rcon"
-version = "0.2.3"
+version = "0.2.4"
 description = "Python class for interacting with Project Zomboid servers using RCON "
 readme = "README.md"
 license = { file = "LICENSE" }
