@@ -1,6 +1,6 @@
 # Zomboid-rcon: Python RCON for Project Zomboid Servers
  
-### Version: 1.0.0
+### Version: 1.0.1
 
 Zomboid-rcon enables you to easily communicate with your Project Zomboid servers via RCON. With zomboid-rcon, you can send commands to your server, manage players, and more, all from within your Python script.
 
@@ -70,6 +70,7 @@ Zomboid-rcon provides built-in methods for the available RCON commands within Pr
 - `noclip("user")` : Allows a player to pass through solid objects.
 - `quit()` : Saves and quits the server.
 - `releasesafehouse()` : Releases a safehouse you own.
+- `reloadlua("filename")` : Reload a lua script on the server.
 - `reloadoptions()` : Reloads server options.
 - `replay("user", [-record | -play | -stop], "filename")` : Records and plays a replay for a moving player.
 - `save()` : Saves the current world.
@@ -90,6 +91,7 @@ Zomboid-rcon provides built-in methods for the available RCON commands within Pr
 - `unbanid("SteamID")` : Unbans a Steam ID.
 - `banuser("user")` : Bans a user.
 - `unbanuser("user")` : Unbans a user.
+- `checkModsNeedUpdate()` : Indicates whether a mod has been updated. Writes answer to log file.
 - `grantadmin("user")` : Gives admin rights to a user.
 - `removeadmin("user")` : Removes admin rights to a user.
 - `kickuser("user")` : Kicks a user from the server.

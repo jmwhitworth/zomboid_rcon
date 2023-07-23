@@ -1,10 +1,10 @@
 [build-system]
-requires      = ["setuptools>=61.0.0", "wheel"]
+requires      = ["setuptools>=61.0.1", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
 name = "zomboid_rcon"
-version = "1.0.0"
+version = "1.0.1"
 description = "Python class for interacting with Project Zomboid servers using RCON "
 readme = "README.md"
 license = { file = "LICENSE" }

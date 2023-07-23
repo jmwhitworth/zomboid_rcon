@@ -7,11 +7,6 @@ Zomboid RCON: https://github.com/JMWhitworth/zomboid_rcon
 
 from .source import CommandResult, RconClient
 
-"""
-Credit to Shockbyte for the following resource:
-https://shockbyte.com/billing/knowledgebase/479/All-Console-Commands-for-Your-Project-Zomboid-Server.html
-"""
-
 
 class ZomboidRCON(RconClient):
     """
@@ -151,6 +146,14 @@ class ZomboidRCON(RconClient):
         /releasesafehouse
         """
         return self.command("releasesafehouse")
+
+
+    def reloadlua(self, filename:str) -> CommandResult:
+        """
+        Reload a lua script on the server.
+        /reloadlua "filename"
+        """
+        return self.command("reloadlua", filename)
 
 
     def reloadoptions(self) -> CommandResult:
@@ -293,6 +296,14 @@ class ZomboidRCON(RconClient):
         /unban "user"
         """
         return self.command("unbanuser", user)
+
+
+    def checkModsNeedUpdate(self) -> CommandResult:
+        """
+        Indicates whether a mod has been updated. Writes answer to log file.
+        /checkModsNeedUpdate
+        """
+        return self.command("checkModsNeedUpdate")
 
 
     def grantadmin(self, user:str) -> CommandResult:
