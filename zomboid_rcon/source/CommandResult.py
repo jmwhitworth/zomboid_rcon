@@ -6,8 +6,11 @@ Zomboid RCON: https://github.com/JMWhitworth/zomboid_rcon
 
 
 class CommandResult:
-    """ A class representing the result of executing a command. """
+    """
+    A class representing the result of executing a command.
+    """
     
+
     def __init__(self,
             command:str,
             response:str,
@@ -26,11 +29,15 @@ class CommandResult:
         self.successful = successful
         self.failureMessage = failureMessage
     
+
     @property
     def command(self) -> str:
-        """ Returns command used """
+        """
+        Returns command used
+        """
         return self._command
     
+
     @command.setter
     def command(self, command:str) -> None:
         """
@@ -42,11 +49,15 @@ class CommandResult:
         else:
             raise ValueError("Command used must be a string")
     
+
     @property
     def failureMessage(self) -> str:
-        """ Returns failure message if command unsuccessful """
+        """
+        Returns failure message if command unsuccessful
+        """
         return self._failureMessage
     
+
     @failureMessage.setter
     def failureMessage(self, failureMessage:str) -> None:
         """
@@ -58,6 +69,7 @@ class CommandResult:
         else:
             raise ValueError("Failure message used must be a string")
     
+
     @property
     def response(self) -> str:
         """
@@ -69,6 +81,7 @@ class CommandResult:
         
         return self.failureMessage
     
+
     @response.setter
     def response(self, newResponse:str) -> None:
         """
@@ -80,10 +93,14 @@ class CommandResult:
         else:
             raise ValueError("Command response must be a string")
     
+
     @property
     def successful(self) -> bool:
-        """ Returns if command was successful """
+        """
+        Returns if command was successful
+        """
         return self._successful
+    
     
     @successful.setter
     def successful(self, successStatus:bool) -> None:

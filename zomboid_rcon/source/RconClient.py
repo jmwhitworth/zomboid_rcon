@@ -11,7 +11,10 @@ from timeout_decorator  import timeout, TimeoutError
 from .CommandResult     import CommandResult
 
 class RconClient:
-    """ Parent class for handling RCON core functionality """
+    """
+    Parent class for handling RCON core functionality
+    """
+    
     
     def __init__(self,
             ip:str,
@@ -34,10 +37,14 @@ class RconClient:
         self._retries = retries
         self.logging = logging
     
+
     def createClient(self) -> Client:
-        """ Returns an rcon.source.Client object for requests """
+        """
+        Returns an rcon.source.Client object for requests
+        """
         return Client(self._ip, self._port, passwd=self._password)
     
+
     def command(self, command:str, *args) -> CommandResult:
         """
         Attempts to execute a given command.
@@ -62,17 +69,23 @@ class RconClient:
             response = f"Session timed out (after {self._retries} attempt(s))"
             )
     
+
     @timeout(10)
     def _command(self, command:str, *args) -> str:
-        """ Private method to handle timeouts """
+        """
+        Private method to handle timeouts
+        """
         try:
             with self.createClient() as client:
                 return client.run(command, *args)
         except ConnectionRefusedError:
             return "Connection refused"
     
+
     def getInfo(self) -> dict:
-        """ Returns dict of current object's information """
+        """
+        Returns dict of current object's information
+        """
         return {
             "ip": self._ip,
             "port": self._port,
