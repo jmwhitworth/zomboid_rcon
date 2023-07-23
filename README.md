@@ -69,6 +69,12 @@ if __name__ == "__main__":
 
 <br>
 
+# Demonstration
+
+![Zomboid RCON demonstration GIF](https://jackwhitworth.com/wp-content/uploads/2023/07/zomboid_rcon_demo.gif)
+
+<br>
+
 # Known Issues
 
 Please note that zomboid-rcon uses the [timeout_decorator](https://pypi.org/project/timeout-decorator/) package, which is currently only compatible with Unix/Linux systems. As a result, **timeouts may cause errors on Windows machines**. We are actively working on finding an alternative solution for Windows users.
