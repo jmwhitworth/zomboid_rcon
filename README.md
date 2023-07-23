@@ -10,7 +10,7 @@ To get started, simply install zomboid-rcon using pip:
 
 ``` pip install zomboid-rcon ```
 
-[Pypi Package.](https://pypi.org/project/zomboid-rcon/)
+[Pypi Package](https://pypi.org/project/zomboid-rcon/) / [GitHub Repo](https://github.com/jmwhitworth/zomboid_rcon)
 
 <br>
 
