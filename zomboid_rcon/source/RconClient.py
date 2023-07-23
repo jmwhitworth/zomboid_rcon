@@ -62,7 +62,7 @@ class RconClient:
             response = f"Session timed out (after {self._retries} attempt(s))"
             )
     
-    @timeout(5)
+    @timeout(10)
     def _command(self, command:str, *args) -> str:
         """ Private method to handle timeouts """
         try:
