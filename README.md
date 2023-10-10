@@ -4,7 +4,6 @@
 
 Zomboid-rcon enables you to easily communicate with your Project Zomboid servers via RCON. With zomboid-rcon, you can send commands to your server, manage players, and more, all from within your Python script.
 
-- [Homepage](https://jackwhitworth.com/posts/zomboid-rcon/)
 - [GitHub Repo](https://github.com/jmwhitworth/zomboid_rcon)
 - [Pypi Package](https://pypi.org/project/zomboid-rcon/)
 
