@@ -112,7 +112,7 @@ pz.command("command", "arg1", "arg2", "etc")
 
 # Demonstration
 
-![Zomboid RCON demonstration GIF](https://jackwhitworth.com/wp-content/uploads/2023/07/zomboid_rcon_demo.gif)
+![Zomboid RCON demonstration GIF](https://media.jackwhitworth.com/uploads/2023/12/zomboid_rcon_demo.gif)
 
 <br><br>
 
