@@ -51,6 +51,28 @@ class ZomboidRcon_test(unittest.TestCase):
         self.pz.additem("user1", "Base.Axe", 5)
         self.pz.command.assert_called_once_with("additem", "user1", "Base.Axe", "5")
 
+    def test_addkey_without_name(self):
+        self.pz.addkey("user1", 7295)
+        self.pz.command.assert_called_once_with("addkey", "user1", "7295")
+
+    def test_addkey_with_name(self):
+        self.pz.addkey("user1", 7295, "Gift Key")
+        self.pz.command.assert_called_once_with(
+            "addkey", "user1", "7295", "Gift Key"
+        )
+
+    def test_addsteamid(self):
+        self.pz.addsteamid("76561198000000000")
+        self.pz.command.assert_called_once_with(
+            "addSteamID", "76561198000000000"
+        )
+
+    def test_addtosafehouse_passes_undocumented_arguments(self):
+        self.pz.addtosafehouse("user1", "safehouse")
+        self.pz.command.assert_called_once_with(
+            "addtosafehouse", "user1", "safehouse"
+        )
+
     def test_addvehicle(self):
         self.pz.addvehicle("Base.VanSeats", "user1")
         self.pz.command.assert_called_once_with("addvehicle", "Base.VanSeats", "user1")
@@ -60,8 +82,13 @@ class ZomboidRcon_test(unittest.TestCase):
         self.pz.command.assert_called_once_with("addxp", "user1", "Strength=100")
 
     def test_clear(self):
-        self.pz.clear()
+        with self.assertWarns(UserWarning):
+            self.pz.clear()
         self.pz.command.assert_called_once_with("clear")
+
+    def test_createhorde2_passes_undocumented_arguments(self):
+        self.pz.createhorde2("10", "user1")
+        self.pz.command.assert_called_once_with("createhorde2", "10", "user1")
 
     def test_createhorde_without_user(self):
         self.pz.createhorde(50)
@@ -86,6 +113,22 @@ class ZomboidRcon_test(unittest.TestCase):
     def test_invisible_false(self):
         self.pz.invisible("user1", False)
         self.pz.command.assert_called_once_with("invisible", "user1", "-false")
+
+    def test_godmodeplayer(self):
+        self.pz.godmodeplayer("user1", False)
+        self.pz.command.assert_called_once_with(
+            "godmodeplayer", "user1", "-false"
+        )
+
+    def test_help_for_command(self):
+        self.pz.help("worldgen")
+        self.pz.command.assert_called_once_with("help", "worldgen")
+
+    def test_invisibleplayer(self):
+        self.pz.invisibleplayer("user1")
+        self.pz.command.assert_called_once_with(
+            "invisibleplayer", "user1", "-true"
+        )
 
     def test_lightning_without_user(self):
         self.pz.lightning()
@@ -143,6 +186,12 @@ class ZomboidRcon_test(unittest.TestCase):
         self.pz.teleport("user1", "user2")
         self.pz.command.assert_called_once_with("teleport", "user1", "user2")
 
+    def test_teleportplayer(self):
+        self.pz.teleportplayer("user1", "user2")
+        self.pz.command.assert_called_once_with(
+            "teleportplayer", "user1", "user2"
+        )
+
     def test_teleportto_formats_coordinates(self):
         self.pz.teleportto(100, 200, 0)
         self.pz.command.assert_called_once_with("teleportto", "100,200,0")
@@ -162,6 +211,13 @@ class ZomboidRcon_test(unittest.TestCase):
     def test_servermsg_strips_leading_trailing_whitespace(self):
         self.pz.servermsg("  Hello  ")
         self.pz.command.assert_called_once_with("servermsg", "Hello")
+
+    def test_replay_warns_that_build_42_removed_it(self):
+        with self.assertWarns(UserWarning):
+            self.pz.replay("user1", "-record", "test.bin")
+        self.pz.command.assert_called_once_with(
+            "replay", "user1", "-record", "test.bin"
+        )
 
     # --- Moderation commands ---
 
@@ -185,9 +241,31 @@ class ZomboidRcon_test(unittest.TestCase):
         self.pz.unbanuser("badguy")
         self.pz.command.assert_called_once_with("unbanuser", "badguy")
 
+    def test_banip(self):
+        self.pz.banip("192.0.2.1")
+        self.pz.command.assert_called_once_with("banip", "192.0.2.1")
+
+    def test_unbanip(self):
+        self.pz.unbanip("192.0.2.1")
+        self.pz.command.assert_called_once_with("unbanip", "192.0.2.1")
+
     def test_kickuser(self):
         self.pz.kickuser("someuser")
         self.pz.command.assert_called_once_with("kickuser", "someuser")
+
+    def test_kickuser_with_reason(self):
+        self.pz.kickuser("someuser", reason="spawn kill")
+        self.pz.command.assert_called_once_with(
+            "kickuser", "someuser", "-r", "spawn kill"
+        )
+
+    def test_kickfromsafehouse_passes_undocumented_arguments(self):
+        self.pz.kickfromsafehouse("someuser")
+        self.pz.command.assert_called_once_with("kickfromsafehouse", "someuser")
+
+    def test_list_passes_undocumented_arguments(self):
+        self.pz.list("players")
+        self.pz.command.assert_called_once_with("list", "players")
 
     def test_grantadmin(self):
         self.pz.grantadmin("someuser")
@@ -204,3 +282,41 @@ class ZomboidRcon_test(unittest.TestCase):
     def test_adduser(self):
         self.pz.adduser("newuser", "password123")
         self.pz.command.assert_called_once_with("adduser", "newuser", "password123")
+
+    def test_reloadalllua(self):
+        self.pz.reloadalllua()
+        self.pz.command.assert_called_once_with("reloadalllua")
+
+    def test_remove_passes_undocumented_arguments(self):
+        self.pz.remove("object")
+        self.pz.command.assert_called_once_with("remove", "object")
+
+    def test_removeitem(self):
+        self.pz.removeitem("Base.Axe", 5)
+        self.pz.command.assert_called_once_with("removeitem", "Base.Axe", "5")
+
+    def test_removemapsymbolsforuser(self):
+        self.pz.removemapsymbolsforuser("user1")
+        self.pz.command.assert_called_once_with(
+            "removemapsymbolsforuser", "user1"
+        )
+
+    def test_removesteamid(self):
+        self.pz.removesteamid("76561198000000000")
+        self.pz.command.assert_called_once_with(
+            "removeSteamID", "76561198000000000"
+        )
+
+    def test_removezombies_passes_undocumented_arguments(self):
+        self.pz.removezombies("user1")
+        self.pz.command.assert_called_once_with("removezombies", "user1")
+
+    def test_setpassword(self):
+        self.pz.setpassword("user1", "newpassword")
+        self.pz.command.assert_called_once_with(
+            "setpassword", "user1", "newpassword"
+        )
+
+    def test_worldgen(self):
+        self.pz.worldgen("status")
+        self.pz.command.assert_called_once_with("worldgen", "status")

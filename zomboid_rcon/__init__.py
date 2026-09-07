@@ -21,4 +21,4 @@ class ZomboidRCON(ZomboidRcon):
 
 
 __title__ = "zomboid_rcon"
-__version__ = "2.1.0"
+__version__ = "2.2.0"
