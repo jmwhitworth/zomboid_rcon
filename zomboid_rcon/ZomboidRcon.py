@@ -1,5 +1,7 @@
 """Zomboid RCON: https://github.com/jmwhitworth/zomboid_rcon"""
 
+import warnings
+
 from .BaseRconClient import BaseRconClient
 from .CommandResult import CommandResult
 
@@ -32,9 +34,30 @@ class ZomboidRcon(BaseRconClient):
             return self.command("additem", user, item, str(count))
         return self.command("additem", user, item)
 
+    def addkey(
+        self, user: str, key_id: str | int, name: str | None = None
+    ) -> CommandResult:
+        """Gives a key to a player.
+        /addkey "username" "keyId" "name"
+        Name is optional.
+        """
+        if name is not None:
+            return self.command("addkey", user, str(key_id), name)
+        return self.command("addkey", user, str(key_id))
+
+    def addsteamid(self, steam_id: str) -> CommandResult:
+        """Adds a Steam ID to the server's allowed Steam IDs.
+        /addSteamID "steamid"
+        """
+        return self.command("addSteamID", steam_id)
+
+    def addtosafehouse(self, *args: str) -> CommandResult:
+        """Runs Build 42's currently undocumented addtosafehouse command."""
+        return self.command("addtosafehouse", *args)
+
     def addvehicle(self, vehicle: str, user: str) -> CommandResult:
         """Spawns a vehicle near a player.
-        /addvehicle vehiclescript 'user'
+        /addvehicle vehiclescript "user or x,y,z"
         """
         return self.command("addvehicle", vehicle, user)
 
@@ -69,9 +92,15 @@ class ZomboidRcon(BaseRconClient):
         return self.command("changepwd", pwd, newPwd)
 
     def clear(self) -> CommandResult:
-        """Clears the server console.
-        /clear
+        """Runs the legacy Build 41 clear command.
+
+        This command is no longer listed by Build 42.
         """
+        warnings.warn(
+            "clear is not listed as a Build 42 command and may be rejected by the server",
+            UserWarning,
+            stacklevel=2,
+        )
         return self.command("clear")
 
     def createhorde(self, number: int, user: str | None = None) -> CommandResult:
@@ -82,6 +111,10 @@ class ZomboidRcon(BaseRconClient):
         if user is not None:
             return self.command("createhorde", str(number), user)
         return self.command("createhorde", str(number))
+
+    def createhorde2(self, *args: str) -> CommandResult:
+        """Runs Build 42's currently undocumented createhorde2 command."""
+        return self.command("createhorde2", *args)
 
     def godmode(self, user: str, value: bool = True) -> CommandResult:
         """Makes a player invincible.
@@ -95,11 +128,14 @@ class ZomboidRcon(BaseRconClient):
         """
         return self.command("gunshot")
 
-    def help(self) -> CommandResult:
+    def help(self, command: str | None = None) -> CommandResult:
         """Brings up the help menu.
-        /help
+        /help "command"
+        Command is optional and shows help for that specific command.
         Not to be confused with the commands available within zomboid_rcon. For a list of these commands see zomboid_rcon's Github repo: https://github.com/jmwhitworth/zomboid_rcon
         """
+        if command is not None:
+            return self.command("help", command)
         return self.command("help")
 
     def invisible(self, user: str, value: bool = True) -> CommandResult:
@@ -154,9 +190,15 @@ class ZomboidRcon(BaseRconClient):
         return self.command("reloadoptions")
 
     def replay(self, user: str, command: str, filename: str) -> CommandResult:
-        """Records and plays a replay for a moving player.
-        /replay "user" [-record | -play | -stop] "filename"
+        """Runs the legacy Build 41 replay command.
+
+        This command was removed in Build 42.
         """
+        warnings.warn(
+            "replay was removed in Build 42 and will be rejected by Build 42 servers",
+            UserWarning,
+            stacklevel=2,
+        )
         return self.command("replay", user, command, filename)
 
     def save(self) -> CommandResult:
@@ -224,6 +266,12 @@ class ZomboidRcon(BaseRconClient):
             return self.command("teleport", user, toUser)
         return self.command("teleport", user)
 
+    def teleportplayer(self, user: str, to_user: str) -> CommandResult:
+        """Teleports one player to another.
+        /teleportplayer "player1" "player2"
+        """
+        return self.command("teleportplayer", user, to_user)
+
     def teleportto(self, x: int, y: int, z: int) -> CommandResult:
         """Teleports to certain coordinates.
         /teleportto x,y,z
@@ -248,6 +296,18 @@ class ZomboidRcon(BaseRconClient):
         /addalltowhitelist
         """
         return self.command("addalltowhitelist")
+
+    def banip(self, ip: str) -> CommandResult:
+        """Bans an IP address.
+        /banip "IP"
+        """
+        return self.command("banip", ip)
+
+    def unbanip(self, ip: str) -> CommandResult:
+        """Unbans an IP address.
+        /unbanip "IP"
+        """
+        return self.command("unbanip", ip)
 
     def adduser(self, user: str, pwd: str) -> CommandResult:
         """Adds a new user to the whitelist.
@@ -315,17 +375,61 @@ class ZomboidRcon(BaseRconClient):
         """
         return self.command("removeadmin", user)
 
-    def kickuser(self, user: str) -> CommandResult:
+    def kickuser(self, user: str, reason: str | None = None) -> CommandResult:
         """Kicks a user from the server.
-        /kickuser "user"
+        /kickuser "user" -r "reason"
+        Reason is optional.
         """
+        if reason is not None:
+            return self.command("kickuser", user, "-r", reason)
         return self.command("kickuser", user)
+
+    def kickfromsafehouse(self, *args: str) -> CommandResult:
+        """Runs Build 42's currently undocumented kickfromsafehouse command."""
+        return self.command("kickfromsafehouse", *args)
+
+    def list(self, *args: str) -> CommandResult:
+        """Runs Build 42's currently undocumented list command."""
+        return self.command("list", *args)
 
     def players(self) -> CommandResult:
         """Lists all connected players.
         /players
         """
         return self.command("players")
+
+    def reloadalllua(self) -> CommandResult:
+        """Reloads all Lua scripts on the server.
+        /reloadalllua
+        """
+        return self.command("reloadalllua")
+
+    def remove(self, *args: str) -> CommandResult:
+        """Runs Build 42's currently undocumented remove command."""
+        return self.command("remove", *args)
+
+    def removeitem(self, item: str, count: int) -> CommandResult:
+        """Removes items of a type from the command issuer.
+        /removeitem "module.item" count
+        A count of zero removes all items of the specified type.
+        """
+        return self.command("removeitem", item, str(count))
+
+    def removemapsymbolsforuser(self, user: str) -> CommandResult:
+        """Removes all shared map symbols for a user.
+        /removemapsymbolsforuser "username"
+        """
+        return self.command("removemapsymbolsforuser", user)
+
+    def removesteamid(self, steam_id: str) -> CommandResult:
+        """Removes a Steam ID from the server's allowed Steam IDs.
+        /removeSteamID "steamid"
+        """
+        return self.command("removeSteamID", steam_id)
+
+    def removezombies(self, *args: str) -> CommandResult:
+        """Runs the currently undocumented removezombies command."""
+        return self.command("removezombies", *args)
 
     def servermsg(self, message: str) -> CommandResult:
         """Broadcast a message to all players.
@@ -339,12 +443,36 @@ class ZomboidRcon(BaseRconClient):
 
     def setaccesslevel(self, user: str, accesslevel: str) -> CommandResult:
         """Set the access/permission level of a player.
-        /setaccesslevel "user" "[admin | moderator | overseer | gm | observer]"
+        /setaccesslevel "user" "[user | priority | observer | gm | moderator | admin]"
         """
         return self.command("setaccesslevel", user, accesslevel)
+
+    def setpassword(self, user: str, new_password: str) -> CommandResult:
+        """Changes a user's password.
+        /setpassword "username" "newpassword"
+        """
+        return self.command("setpassword", user, new_password)
 
     def voiceban(self, user: str, ban: str) -> CommandResult:
         """Ban a user from using the voice feature.
         /voiceban "user" [-true | -false]
         """
         return self.command("voiceban", user, ban)
+
+    def worldgen(self, action: str) -> CommandResult:
+        """Controls Build 42's full world generator.
+        /worldgen [start | recheck | stop | status]
+        """
+        return self.command("worldgen", action)
+
+    def godmodeplayer(self, user: str, value: bool = True) -> CommandResult:
+        """Changes god mode for another player.
+        /godmodeplayer "username" -true|-false
+        """
+        return self.command("godmodeplayer", user, f"-{str(value).lower()}")
+
+    def invisibleplayer(self, user: str, value: bool = True) -> CommandResult:
+        """Changes invisibility for another player.
+        /invisibleplayer "username" -true|-false
+        """
+        return self.command("invisibleplayer", user, f"-{str(value).lower()}")
